@@ -1,18 +1,52 @@
+
+let inImg = [];
+// PImage[] inImg;
+let numImages = 37; //todo: get this from the server please
+let count = 0;
+var tiempoEspera;
+var tiempoInicio;
 function preload() {
-  // preload() runs once
-  img = loadImage('static/Axel_12.jpg');
+  // inImg = new PImage[numImages];
+  for (var i = 0; i < numImages; i++) {
+    var imageName = i + ".jpg";
+    inImg[i] = loadImage('static/' + imageName);
+    // inImg[i] = loadImage('static/0.jpg');
+    // inImg[i] = loadImage("{{url_for('static', filename='0.jpg')}}")
+    // inImg[i] = loadImage(staticPath + i + ".jpg"); //p5 not working with gif images??
+    //    inImg[i] = loadImage("/home/tom/Documents/PROGRAMMING/PROCESSING/processing-2.2.1/sketchbook/TomScripts/K8Remote/K8RemoteProcessingJSDemo/data/0.jpg");
+  }
+  // inImg[0] = loadImage('static/0.jpg');
+  // inImg[0] = loadImage('static/Axel_12.jpg'); //ok this works
 }
 
+
+
 function setup() {
-    createCanvas(window.innerHeight, window.innerWidth);
+  createCanvas(window.innerHeight, window.innerWidth);
+  tiempoInicio = 0;
+  tiempoEspera = 3; // 3 segundos
+}
+
+function draw() {
+  if (millis() - tiempoInicio > tiempoEspera) {
+    count++;
+    if (count > numImages) {
+      count = 0;
+    }
+    if (count < numImages) {
+      image(inImg[count], 0, 0);
+    }
+    tiempoInicio = millis();
   }
-  
-  function draw() {
-    image(img, 0, 0, width, height);
-    // if (mouseIsPressed) {
-    //   fill(light, 0, 0);
-    // } else {
-    //   fill(255);
-    // }
-    // ellipse(mouseX, mouseY, 80, 80);
-  }
+  // count++;
+  // if(count > numImages){
+  //   count = 0;
+  // }
+
+  // if(count < numImages){
+  //   for(var t = 0; t < 10; t++){
+  //     image(inImg[count], 0, 0);
+  //   }    
+  // }
+
+}
