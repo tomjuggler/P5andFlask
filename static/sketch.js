@@ -35,6 +35,19 @@ function draw() {
     }
     if (count < numImages) {
       image(inImg[count], 0, 0);
+      //juggler face:
+    //    rectMode(CENTER);
+    
+    ellipse(198, 100, 82, 101); //face
+    //    rectMode(CORNER);
+    stroke(200, 200, 200);
+    line(180, 120, 215, 120); //mouth
+    ellipse(185, 80, 10, 10); //eye
+    ellipse(205, 80, 10, 10); //eye
+    point(185, 80); //eye
+    point(205, 80); //eye
+    line(192, 90, 192, 95);
+    line(192, 95, 196, 95);
     }
     tiempoInicio = millis();
   }
