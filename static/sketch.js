@@ -1,7 +1,7 @@
 
 let inImg = [];
 // PImage[] inImg;
-let numImages = 37; //todo: get this from the server please
+let numImages = light; //todo: get this from the server please
 let count = 0;
 var tiempoEspera;
 var tiempoInicio;
@@ -25,6 +25,8 @@ function setup() {
   createCanvas(window.innerHeight, window.innerWidth);
   tiempoInicio = 0;
   tiempoEspera = 3; // 3 segundos
+  // background(0);
+  
 }
 
 function draw() {
@@ -34,10 +36,11 @@ function draw() {
       count = 0;
     }
     if (count < numImages) {
-      image(inImg[count], 0, 0);
+      // inImg[count].filter(INVERT);
+      image(inImg[count], 0, 20);
       //juggler face:
     //    rectMode(CENTER);
-    
+    // fill(0);
     ellipse(198, 100, 82, 101); //face
     //    rectMode(CORNER);
     stroke(200, 200, 200);
@@ -49,8 +52,10 @@ function draw() {
     line(192, 90, 192, 95);
     line(192, 95, 196, 95);
     }
+    
     tiempoInicio = millis();
   }
+  // filter(INVERT);
   // count++;
   // if(count > numImages){
   //   count = 0;
