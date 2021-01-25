@@ -41,7 +41,7 @@ function draw() {
       //juggler face:
     //    rectMode(CENTER);
     // fill(0);
-    ellipse(198, 100, 82, 101); //face
+    // ellipse(198, 100, 82, 101); //face
     //    rectMode(CORNER);
     stroke(200, 200, 200);
     line(180, 120, 215, 120); //mouth
@@ -68,3 +68,9 @@ function draw() {
   // }
 
 }
+function mousePressed() { 
+      
+    // preload();
+    print("preload?");
+    //preload() can't be set here, or doesn't work..
+} 
