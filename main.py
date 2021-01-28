@@ -17,7 +17,7 @@ def changePattern(pattern):
         imageObject.seek(frame)
         dir_to_save = Path(absFilePath + "/static/")
         print(dir_to_save)
-        fileSave = os.path.join(dir_to_save, f"{frame}.gif")
+        fileSave = os.path.join(dir_to_save, f"{pattern}{frame}.gif") #unique name per image pattern frame
         imageObject.save(os.path.join(fileSave))
         #run bash script to change to .jpg and move to correct directory...
         subprocess.Popen(['./convert.sh', fileSave])
@@ -36,25 +36,30 @@ for frame in range(0,imageObject.n_frames):
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=['GET', 'POST'])
 def home():
     print(request.method)
+    pattern = "box"
     if request.method == 'POST':
         if request.form.get('Cascade') == 'Cascade':
             # pass
-            changePattern("cascade")
+            pattern = "cascade"
+            changePattern(pattern)
             print("cascade")
         elif  request.form.get('Box') == 'Box':
             # pass # do something else
-            changePattern("box")
+            pattern = "box"
+            changePattern(pattern)
             print("box")
         else:
             # pass # unknown
+            changePattern(pattern) #default
             return render_template("index.html")
     elif request.method == 'GET':
         # return render_template("index.html")
         print("No Post Back Call")
-    return render_template("index.html", variable=imageObject.n_frames)
+    return render_template("index.html", variable=imageObject.n_frames, pattern=pattern)
     
 if __name__ == "__main__":
     app.run(debug=True)

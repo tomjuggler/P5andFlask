@@ -1,14 +1,15 @@
 
 let inImg = [];
 // PImage[] inImg;
-let numImages = light; //todo: get this from the server please
+let patName = pattern;
+let numImages = light; //from the server please
 let count = 0;
 var tiempoEspera;
 var tiempoInicio;
 function preload() {
   // inImg = new PImage[numImages];
   for (var i = 0; i < numImages; i++) {
-    var imageName = i + ".jpg";
+    var imageName = patName + i + ".jpg";
     inImg[i] = loadImage('static/' + imageName);
     // inImg[i] = loadImage('static/0.jpg');
     // inImg[i] = loadImage("{{url_for('static', filename='0.jpg')}}")
@@ -73,4 +74,5 @@ function mousePressed() {
     // preload();
     print("preload?");
     //preload() can't be set here, or doesn't work..
+    //maybe save all images as different names on server, then call those with a variable! 
 } 
