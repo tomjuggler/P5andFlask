@@ -27,7 +27,9 @@ function setup() {
   tiempoInicio = 0;
   tiempoEspera = 3; // 3 segundos
   // background(0);
-  
+  // for (var i = 0; i < numImages; i++) {
+  // inImg[i].filter(INVERT); //done in bash now!
+  // }
 }
 
 function draw() {
@@ -37,7 +39,7 @@ function draw() {
       count = 0;
     }
     if (count < numImages) {
-      // inImg[count].filter(INVERT);
+      //  inImg[count].filter(INVERT);
       image(inImg[count], 0, 20);
       //juggler face:
     //    rectMode(CENTER);
