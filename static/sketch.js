@@ -28,7 +28,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(window.innerHeight, window.innerWidth);
+  createCanvas(window.innerWidth, window.innerHeight);
   tiempoInicio = 0;
   tiempoEspera = 2; // 3 segundos
   // background(0);
@@ -104,12 +104,12 @@ function draw() {
       strokeWeight(2);
       point(185, 80); //eye
       point(205, 80); //eyej
-      point(186, 80); //eye
-      point(206, 80); //eye
-      point(186, 81); //eye
-      point(205, 81); //eye
-      point(186, 81); //eye
-      point(206, 81); //eye
+      // point(186, 80); //eye
+      // point(206, 80); //eye
+      // point(186, 81); //eye
+      // point(205, 81); //eye
+      // point(186, 81); //eye
+      // point(206, 81); //eye
       line(192, 92, 192, 97);
       line(192, 97, 196, 97);
     }
