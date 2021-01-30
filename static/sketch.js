@@ -9,7 +9,7 @@ var tiempoInicio;
 function preload() {
   // inImg = new PImage[numImages];
   for (var i = 0; i < numImages; i++) {
-    var imageName = patName + i + ".jpg";
+    var imageName = patName + i + ".png";
     inImg[i] = loadImage('static/' + imageName);
     // inImg[i] = loadImage('static/0.jpg');
     // inImg[i] = loadImage("{{url_for('static', filename='0.jpg')}}")
@@ -27,20 +27,57 @@ function setup() {
   tiempoInicio = 0;
   tiempoEspera = 3; // 3 segundos
   // background(0);
-  // for (var i = 0; i < numImages; i++) {
+  colorMode(RGB, 255, 255, 255, 255);
+  let c = color(0, 126, 255, 102);
+  for (var i = 0; i < numImages; i++) {
+   for(var j = 0; j < inImg.width; j ++){
+     for(var k = 0; k < inImg.height; k++){
+       
+      //  inImg.pixels[j*k] = c);
+     }
+   }
   // inImg[i].filter(INVERT); //done in bash now!
-  // }
+  
+  }
+  // tint(0,0,0,2);
+  background(0, 255, 0);
 }
 
 function draw() {
+  
   if (millis() - tiempoInicio > tiempoEspera) {
     count++;
     if (count > numImages) {
       count = 0;
     }
     if (count < numImages) {
+     
       //  inImg[count].filter(INVERT);
       image(inImg[count], 0, 20);
+      loadPixels();
+      let r = 100;
+      let g = 0; 
+      let b = 100; 
+      let a = 0; 
+      let d = pixelDensity();
+      for (let y = 0; y < inImg.width; y++) {
+          for (let x = 0; x < inImg.height; x++) {
+        for (let i = 0; i < d; i++) {
+          for (let j = 0; j < d; j++) {
+            index = 4 * ((y * d + j) * width * d + (x * d + i));
+            if(pixels[index+1] > 74){
+              pixels[index] = r;
+              pixels[index+1] = g;
+              pixels[index+2] = b;
+              pixels[index+3] = a;
+            }
+                
+            
+          }
+        }
+          }
+      }
+      updatePixels();
       //juggler face:
     //    rectMode(CENTER);
     // fill(0);

@@ -15,6 +15,7 @@ def changePattern(pattern):
     absFilePath = os.path.dirname(os.path.abspath(__file__))
     for frame in range(0,imageObject.n_frames):
         imageObject.seek(frame)
+        imageObject.convert("RGBA")
         dir_to_save = Path(absFilePath + "/static/")
         print(dir_to_save)
         fileSave = os.path.join(dir_to_save, f"{pattern}{frame}.gif") #unique name per image pattern frame
