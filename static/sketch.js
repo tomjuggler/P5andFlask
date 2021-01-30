@@ -92,13 +92,26 @@ function draw() {
       // ellipse(198, 100, 82, 101); //face
       //    rectMode(CORNER);
       stroke(200, 200, 200);
-      line(180, 120, 215, 120); //mouth
+      fill(100);
+      bezier(180, 110, 180, 120, 215, 120, 215, 110); //mouth
+      fill(0);
+      ellipse(185, 80, 20, 20); //eyeglass
+      ellipse(205, 80, 20, 20); //eyeglass
       ellipse(185, 80, 10, 10); //eye
       ellipse(205, 80, 10, 10); //eye
+      line(215, 80, 235, 74);
+      line(175, 80, 166, 75);
+      strokeWeight(2);
       point(185, 80); //eye
-      point(205, 80); //eye
-      line(192, 90, 192, 95);
-      line(192, 95, 196, 95);
+      point(205, 80); //eyej
+      point(186, 80); //eye
+      point(206, 80); //eye
+      point(186, 81); //eye
+      point(205, 81); //eye
+      point(186, 81); //eye
+      point(206, 81); //eye
+      line(192, 92, 192, 97);
+      line(192, 97, 196, 97);
     }
 
     tiempoInicio = millis();
