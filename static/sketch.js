@@ -51,23 +51,29 @@ function setup() {
 }
 
 function draw() {
-
+background(random(255), random(200), random(255));
+fill(0);
+stroke(0);
+rect(0, 0, width, 20);
+rect(inImg[0].width, 0, width, height);
+rect(0, inImg[0].height+20, width, height);
   let d = pixelDensity();
   if (millis() - tiempoInicio > tiempoEspera) {
     count++;
     // g = int(random(0, 255));
     // r = 255-g;
     // print(count);
-    if (count > numImages) {
+    if (count >= numImages) {
       count = 0;
       // print("count is 0");
     }
     if (count < numImages) {
       // print(count);
       //  inImg[count].filter(INVERT);
+      
       image(inImg[count], 0, 20);
       loadPixels();
-
+/*
       for (let y = 0; y < inImg[count].height; y++) {
         for (let x = 0; x < inImg[count].width; x++) {
           for (let i = 0; i < d; i++) {
@@ -86,6 +92,7 @@ function draw() {
         }
       }
       updatePixels();
+      */
       //juggler face:
       //    rectMode(CENTER);
       // fill(0);
