@@ -11,6 +11,12 @@ var g = 0;
 var b = 0;
 var a = 255;
 
+//patterns variables: 
+var patternCounter = 0; //will this overflow?
+var interval = 1000;
+var threeWay = 0;
+var rainbowWay = 0;
+
 function preload() {
   // inImg = new PImage[numImages];
   for (var i = 0; i < numImages; i++) {
@@ -51,12 +57,13 @@ function setup() {
 }
 
 function draw() {
-background(random(255), random(200), random(255));
-fill(0);
-stroke(0);
-rect(0, 0, width, 20);
-rect(inImg[0].width, 0, width, height);
-rect(0, inImg[0].height+20, width, height);
+  fade();
+  // background(random(255), random(200), random(255));
+  fill(0);
+  stroke(0);
+  rect(0, 0, width, 20);
+  rect(inImg[0].width, 0, width, height);
+  rect(0, inImg[0].height + 20, width, height);
   let d = pixelDensity();
   if (millis() - tiempoInicio > tiempoEspera) {
     count++;
@@ -70,29 +77,29 @@ rect(0, inImg[0].height+20, width, height);
     if (count < numImages) {
       // print(count);
       //  inImg[count].filter(INVERT);
-      
+
       image(inImg[count], 0, 20);
       loadPixels();
-/*
-      for (let y = 0; y < inImg[count].height; y++) {
-        for (let x = 0; x < inImg[count].width; x++) {
-          for (let i = 0; i < d; i++) {
-            for (let j = 0; j < d; j++) {
-              index = 4 * ((y * d + j) * width * d + (x * d + i));
-              if (pixels[index + 1] > 100 && pixels[index] < 100) {
-                pixels[index] = r;
-                pixels[index + 1] = g;
-                pixels[index + 2] = b;
-                pixels[index + 3] = a;
+      /*
+            for (let y = 0; y < inImg[count].height; y++) {
+              for (let x = 0; x < inImg[count].width; x++) {
+                for (let i = 0; i < d; i++) {
+                  for (let j = 0; j < d; j++) {
+                    index = 4 * ((y * d + j) * width * d + (x * d + i));
+                    if (pixels[index + 1] > 100 && pixels[index] < 100) {
+                      pixels[index] = r;
+                      pixels[index + 1] = g;
+                      pixels[index + 2] = b;
+                      pixels[index + 3] = a;
+                    }
+      
+      
+                  }
+                }
               }
-
-
             }
-          }
-        }
-      }
-      updatePixels();
-      */
+            updatePixels();
+            */
       //juggler face:
       //    rectMode(CENTER);
       // fill(0);
@@ -142,4 +149,147 @@ function mousePressed() {
   // print("preload?");
   //preload() can't be set here, or doesn't work..
   //maybe save all images as different names on server, then call those with a variable! 
-} 
+}
+
+
+////////////////////////////////////// PATTERNS ///////////////////////////////////////////////////////////
+
+function fade() {
+  patternCounter++;
+  if (patternCounter % 10 > 0) {
+    colorMode(HSB, 100);
+    background(patternCounter % 100, 100, 100);
+    // rect(0, rectSize*htCount+rectSize, 400, 450);
+    colorMode(RGB, 100);
+  }
+}
+
+function strobePlus(){
+  background(random(255), random(255), random(255));
+  // rect(0, rectSize*htCount+rectSize, 400, 450);
+}
+
+function RGBStrobe() {
+  console.log("RGB?");
+  patternCounter++;
+  // if(patternCounter > 9000){
+    // patternCounter = 0;
+    console.log("patternCounter is: " + patternCounter%interval);
+  // }
+  if (patternCounter % interval > 0) {
+    if (threeWay == 0) {
+      background(255, 0, 0);
+      //  rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (threeWay == 1) {
+      background(0, 255, 0);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (threeWay == 2) {
+      background(0, 0, 255);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    }
+    threeWay++;
+    if (threeWay > 2) {
+      threeWay = 0;
+    }
+  }
+
+}
+
+function rainbow() {
+  patternCounter++;
+  if (patternCounter % interval > 0) {
+    if (rainbowWay == 0) {
+      background(255, 0, 0);
+      //  rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 1) {
+      background(0, 255, 0);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 2) {
+      background(0, 0, 255);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 3) {
+      background(0, 255, 255);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 4) {
+      background(255, 255, 0);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 5) {
+      background(255, 0, 255);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    }
+    rainbowWay++;
+    if (rainbowWay > 5) {
+      rainbowWay = 0;
+    }
+  }
+}
+
+function halfStrobe() {
+  patternCounter++;
+  if (patternCounter % interval > 0) {
+    if (rainbowWay == 0) {
+      background(255, 0, 0);
+      //  rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 1) {
+      background(0, 255, 0);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 2) {
+      background(0, 0, 255);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 3) {
+      background(220, 220, 220);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 4) {
+      background(220, 220, 220);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (rainbowWay == 5) {
+      background(220, 220, 220);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    }
+    rainbowWay++;
+    if (rainbowWay > 5) {
+      rainbowWay = 0;
+    }
+  }
+}
+
+function GRStrobe() {
+  patternCounter++;
+  var longInterval = interval * 100;
+  if (patternCounter % longInterval > 0) { //works the same without this loop... not understanding something here
+    if (threeWay == 0) {
+      background(255, 0, 0);
+      //  rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (threeWay == 1) {
+      background(0, 255, 0);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    }
+    threeWay++;
+    if (threeWay > 1) {
+      threeWay = 0;
+    }
+  }
+}
+
+function BGStrobe() {
+  patternCounter++;
+  if (patternCounter % interval > 0) {
+    if (threeWay == 0) {
+      background(0, 0, 255);
+      //  rect(0, rectSize*htCount+rectSize, 400, 450);
+    } else if (threeWay == 1) {
+      background(0, 255, 0);
+      // rect(0, rectSize*htCount+rectSize, 400, 450);
+    }
+    threeWay++;
+    if (threeWay > 1) {
+      threeWay = 0;
+    }
+  }
+}
+
+function off() {
+  background(0, 0, 0);
+  // rect(0, rectSize*htCount+rectSize, 400, 450);
+}
+

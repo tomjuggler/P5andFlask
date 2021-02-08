@@ -53,6 +53,11 @@ def home():
             pattern = "box"
             changePattern(pattern)
             print("box")
+        elif  request.form.get('Statueofliberty') == 'Statueofliberty':
+            # pass # do something else
+            pattern = "statueofliberty"
+            changePattern(pattern)
+            print("statueofliberty")
         else:
             # pass # unknown
             changePattern(pattern) #default
