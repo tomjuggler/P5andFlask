@@ -8,6 +8,7 @@ import requests
 import os
 from pathlib import Path
 import subprocess
+import json
 # from subprocess import Popen
 absFilePath = os.path.dirname(os.path.abspath(__file__))
 dir_to_save = Path(absFilePath + "/static/")
@@ -51,10 +52,10 @@ def changePattern(pattern):
             imageObject.save(os.path.join(fileSave))
             #run bash script to change to .jpg and move to correct directory...
             subprocess.Popen(['./convert.sh', fileSave])
-    print(f'number of frames: ')
-    print(imageObject.n_frames)
-    frames = imageObject.n_frames
-    return frames
+    # print(f'number of frames: ')
+    # print(imageObject.n_frames)
+    numFrames = imageObject.n_frames
+    return numFrames
 
 
 
@@ -63,33 +64,43 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    print(request.method)
+    # print(request.method)
     pattern = "box"
+    frames = 38
     if request.method == 'POST':
-        if request.form.get('Cascade') == 'Cascade':
-            # pass
-            pattern = "cascade"
-            frames = changePattern(pattern)
-            print("cascade")
-        elif  request.form.get('Box') == 'Box':
-            # pass # do something else
-            pattern = "box"
-            frames = changePattern(pattern)
-            print("box")
-        elif  request.form.get('Statueofliberty') == 'Statueofliberty':
-            # pass # do something else
-            pattern = "statueofliberty"
-            frames = changePattern(pattern)
-            print("statueofliberty")
-        else:
+        pattern = next(iter(request.form)).lower()
+        print(type(pattern))
+        frames = changePattern(pattern)
+        print(f'pattern from form: ')
+        print(pattern)
+        print(f'number of frames: ')
+        print(frames)
+        # if request.form.get('Cascade') == 'Cascade':
+        #     # pass
+        #     pattern = "cascade"
+        #     frames = changePattern(pattern)
+        #     # print("cascade")
+        # elif  request.form.get('Box') == 'Box':
+        #     # pass # do something else
+        #     pattern = "box"
+        #     frames = changePattern(pattern)
+        #     # print("box")
+        # elif  request.form.get('Statueofliberty') == 'Statueofliberty':
+        #     # pass # do something else
+        #     pattern = "statueofliberty"
+        #     frames = changePattern(pattern)
+            # print("statueofliberty")
+        # else:
             # pass # unknown
-            changePattern(pattern) #default
-            return render_template("index.html")
+        # changePattern(pattern) #default
+        # return render_template("index.html")
     elif request.method == 'GET':
         # return render_template("index.html")
         print("No Post Back Call")
-    # return render_template("index.html", variable=23, pattern=pattern)
-    return render_template("index.html", variable=frames, pattern=pattern)
+    print(f'pattern after form: ')
+    print(pattern) 
+    return render_template("index.html", variable=23, pattern=pattern)
+    # return render_template("index.html", variable=frames, pattern="box")
     
 if __name__ == "__main__":
     app.run(debug=True)

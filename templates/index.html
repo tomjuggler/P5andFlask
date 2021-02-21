@@ -1,27 +1,29 @@
- 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Flask Tutorial</title>
-  </head>
-  <body>
-    <h1> K8 Virtual Juggling </h1>
-    <p> Choose your pattern... </p>
-    <form method="post" action="/">
-      <input type="submit" value="Cascade" name="Cascade"/>
-      <input type="submit" value="Statueofliberty" name="Statueofliberty" />
-</form>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Flask Tutorial</title>
+</head>
+
+<body>
+  <h1> K8 Virtual Juggling </h1>
+  <p> Choose your pattern... </p>
+  <form method="post" action="/">
+    <input type="submit" value="Cascade" name="Cascade" />
+    <input type="submit" value="Statueofliberty" name="Statueofliberty" />
+    <input type="submit" value="Box" name="Box" />
+  </form>
+</body>
+
 </html>
 <script>
 
-let light = {{variable|tojson}}; //load variable from python!
-console.log("light is: " + light);
-let pattern = "{{pattern}}";
-console.log("pattern is: " + pattern);
+  let light = {{ variable | tojson}}; //load variable from python!
+  console.log("light is: " + light);
+  let pattern = "{{pattern}}";
+  console.log("pattern is: " + pattern);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
-<script 
-src="{{url_for('static', filename='sketch.js')}}">
+<script src="{{url_for('static', filename='sketch.js')}}">
 </script>
