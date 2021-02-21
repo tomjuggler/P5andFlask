@@ -40,6 +40,7 @@ def changePattern(pattern):
 
     except IOError:
         print(f'no file exists, loading...')
+        #todo: support 5 ball patterns here /5balltricks/
         imageObject = Image.open(requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw)
             # Display individual frames from the loaded animated GIF file
             
@@ -50,7 +51,7 @@ def changePattern(pattern):
             imageObject.convert("RGBA")
             fileSave = os.path.join(dir_to_save, f"{pattern}{frame}.gif") #unique name per image pattern frame
             imageObject.save(os.path.join(fileSave))
-            #run bash script to change to .jpg and move to correct directory...
+            #run bash script to change to .png and move to correct directory...
             subprocess.Popen(['./convert.sh', fileSave])
     # print(f'number of frames: ')
     # print(imageObject.n_frames)
@@ -75,32 +76,12 @@ def home():
         print(pattern)
         print(f'number of frames: ')
         print(frames)
-        # if request.form.get('Cascade') == 'Cascade':
-        #     # pass
-        #     pattern = "cascade"
-        #     frames = changePattern(pattern)
-        #     # print("cascade")
-        # elif  request.form.get('Box') == 'Box':
-        #     # pass # do something else
-        #     pattern = "box"
-        #     frames = changePattern(pattern)
-        #     # print("box")
-        # elif  request.form.get('Statueofliberty') == 'Statueofliberty':
-        #     # pass # do something else
-        #     pattern = "statueofliberty"
-        #     frames = changePattern(pattern)
-            # print("statueofliberty")
-        # else:
-            # pass # unknown
-        # changePattern(pattern) #default
-        # return render_template("index.html")
     elif request.method == 'GET':
-        # return render_template("index.html")
         print("No Post Back Call")
     print(f'pattern after form: ')
     print(pattern) 
-    return render_template("index.html", variable=23, pattern=pattern)
-    # return render_template("index.html", variable=frames, pattern="box")
+    return render_template("index.html", variable=frames, pattern=pattern)
+    # return render_template("index.html", variable=frames, pattern="box") #test
     
 if __name__ == "__main__":
     app.run(debug=True)
