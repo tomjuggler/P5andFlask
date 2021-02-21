@@ -17,6 +17,10 @@ var interval = 1000;
 var threeWay = 0;
 var rainbowWay = 0;
 
+//iterator for different patterns
+var patternIter = 0;
+var maxPatterns = 7;
+
 function preload() {
   // inImg = new PImage[numImages];
   for (var i = 0; i < numImages; i++) {
@@ -57,7 +61,7 @@ function setup() {
 }
 
 function draw() {
-  fade();
+  patternChooser();
   // background(random(255), random(200), random(255));
   fill(0);
   stroke(0);
@@ -144,7 +148,10 @@ function draw() {
 
 }
 function mousePressed() {
-
+  patternIter++;
+  if(patternIter > maxPatterns){
+    patternIter = 0;
+  }
   // preload();
   // print("preload?");
   //preload() can't be set here, or doesn't work..
@@ -154,6 +161,44 @@ function mousePressed() {
 
 ////////////////////////////////////// PATTERNS ///////////////////////////////////////////////////////////
 
+function patternChooser(){
+  switch(patternIter){
+    case 0:
+      fade();
+    break;
+    case 1: 
+      strobePlus();
+    break;
+    case 2: 
+      RGBStrobe();
+    break;
+    case 3: 
+      rainbow();
+    break;
+    case 4: 
+      halfStrobe();
+    break;
+    case 5: 
+      GRStrobe();
+    break;
+    case 6: 
+      BGStrobe();
+    break;
+    case 7: 
+      red2();
+    break;
+    case 8: 
+      green2();
+    break;
+    case 9:
+      blue2();
+    break;
+
+    default:
+      red2();
+    break;
+  }
+}
 function fade() {
   patternCounter++;
   if (patternCounter % 10 > 0) {
@@ -291,5 +336,27 @@ function BGStrobe() {
 function off() {
   background(0, 0, 0);
   // rect(0, rectSize*htCount+rectSize, 400, 450);
+}
+
+function red2(){
+  background(255, 0, 0);
+}
+function green2(){
+  background(0, 255, 0);
+}
+function blue2(){
+  background(0, 0, 255);
+}
+function cyan(){
+  background(0, 255, 255);
+}
+function yellow(){
+  background(255, 255, 0);
+}
+function magenta(){
+  background(255, 0, 255);
+}
+function white(){
+  background(255, 255, 255);
 }
 
