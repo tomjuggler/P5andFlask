@@ -19,7 +19,7 @@ var rainbowWay = 0;
 
 //iterator for different patterns
 var patternIter = 0;
-var maxPatterns = 7;
+var maxPatterns = 13;
 
 function preload() {
   // inImg = new PImage[numImages];
@@ -40,7 +40,7 @@ function preload() {
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   tiempoInicio = 0;
-  tiempoEspera = 2; // 3 segundos
+  tiempoEspera = 1; // 3 segundos
   // background(0);
   colorMode(RGB, 255, 255, 255, 255);
   let c = color(0, 126, 255, 102);
@@ -192,6 +192,18 @@ function patternChooser(){
     break;
     case 9:
       blue2();
+    break;
+    case 10: 
+      cyan();
+    break;
+    case 11: 
+      yellow();
+    break;
+    case 12:
+      magenta();
+    break;
+    case 13: 
+      white();
     break;
 
     default:
