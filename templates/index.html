@@ -9,16 +9,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<head>
+<head id="head">
   <meta charset="utf-8">
-  <title>Flask Tutorial</title>
+  <title class="title" id="title">Flask Tutorial</title>
 </head>
 
-<body>
+<body id="body">
   <h1> K8 Virtual Juggling </h1>
   <p> Choose your pattern... </p>
 
-  <form method="post" action="/">
+  <form id="form" method="post" action="/">
     <input type="submit" style="width: 200px; height: 40px;" value="Cascade" name="Cascade" />
     <input type="submit" style="width: 200px; height: 40px;" value="ReverseCascade" name="ReverseCascade" />
     <input type="submit" style="width: 200px; height: 40px;" value="millsmess" name="millsmess" />
@@ -28,7 +28,7 @@
 
     <input type="submit" style="width: 200px; height: 40px;" value="StatueOfLiberty" name="StatueOfLiberty" />
     <input type="submit" style="width: 200px; height: 40px;" value="Box" name="Box" />
-    <input type="submit" style="width: 200px; height: 40px;" value="Columnsonehand" name="Columnsonehand" />
+    <!-- <input type="submit" style="width: 200px; height: 40px;" value="Columnsonehand" name="Columnsonehand" /> -->
 
   </form>
   <br>
@@ -36,13 +36,29 @@
 </body>
 
 </html>
+
 <script>
 
   let light = {{ variable | tojson}}; //load variable from python!
   console.log("light is: " + light);
+
   let pattern = "{{pattern}}";
   console.log("pattern is: " + pattern);
+
+  
+
+  $(document).ready(function () {
+    console.log("ready");
+    // $("#body").css("background-color", "black"); //works
+    //$("title").css("background-color", "red", "color", "white"); //not working
+    // $(this).css("background-color", "black");
+
+    //add to form: (works!)
+    $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="Columnsonehand" name="Columnsonehand" />'));
+    //todo: use above method to build buttons for multiple patterns using list provided by server 
+  });
+
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
-<script src="{{url_for('static', filename='sketch.js')}}">
-</script>
+<script src="{{url_for('static', filename='sketch.js')}}"></script>

@@ -21,11 +21,14 @@ var rainbowWay = 0;
 var patternIter = 0;
 var maxPatterns = 13;
 
+var remoteImage;
+
 function preload() {
   // inImg = new PImage[numImages];
   for (var i = 0; i < numImages; i++) {
     var imageName = patName + i + ".png";
     inImg[i] = loadImage('static/' + imageName);
+    remoteImage = loadImage('static/K8Remote.png');
     // inImg[i] = loadImage('static/0.jpg');
     // inImg[i] = loadImage("{{url_for('static', filename='0.jpg')}}")
     // inImg[i] = loadImage(staticPath + i + ".jpg"); //p5 not working with gif images??
@@ -145,9 +148,11 @@ function draw() {
   //     image(inImg[count], 0, 0);
   //   }    
   // }
-
+image(remoteImage, width/8*3, 0, width/6*4, height/6*4); //todo: get the relative button points for mousePressed!
+text("x: " + width/mouseX*100 + " y: " + height/mouseY*100, mouseX, mouseY);
 }
 function mousePressed() {
+  //todo: make mouse grid corresponding to remote buttons
   patternIter++;
   if(patternIter > maxPatterns){
     patternIter = 0;

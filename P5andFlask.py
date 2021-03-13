@@ -63,6 +63,7 @@ def changePattern(pattern):
 app = Flask(__name__)
 
 
+#todo: use getLinks.py method to get all 3 ball patterns and send to server as json list
 @app.route("/", methods=['GET', 'POST'])
 def home():
     # print(request.method)
