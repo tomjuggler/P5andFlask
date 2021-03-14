@@ -131,9 +131,9 @@ def home():
         print("No Post Back Call")
     print(f'pattern after form: ')
     print(pattern) 
-    # allPatterns = allPatternsFromSite() #todo: allPatterns currently only returns 3Ball...
-    
-    data["threeBall"] = ["Alex", "CherryPicker"]
+    allPatterns = allPatternsFromSite() #todo: allPatterns currently only returns 3Ball...
+    data["threeBall"] = allPatterns
+    # data["threeBall"] = ["Alex", "CherryPicker"]
     print("data is: ")
     print(data)
     return render_template("index.html", variable=frames, pattern=pattern, data=data)

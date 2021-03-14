@@ -110,8 +110,10 @@ function draw() {
       //juggler face:
       //    rectMode(CENTER);
       // fill(0);
-      // ellipse(198, 100, 82, 101); //face
+      // ellipse(198, 100, 82, 101); 
+      //face
       //    rectMode(CORNER);
+/*
       stroke(200, 200, 200);
       fill(100);
       bezier(180, 110, 180, 120, 215, 120, 215, 110); //mouth
@@ -133,6 +135,7 @@ function draw() {
       // point(206, 81); //eye
       line(192, 92, 192, 97);
       line(192, 97, 196, 97);
+      */
     }
 
     tiempoInicio = millis();
