@@ -1,5 +1,5 @@
  
-from flask import Flask, render_template, request      
+from flask import Flask, render_template, request, json, jsonify   
 # Reading an animated GIF file using Python Image Processing Library - Pillow
 
 from PIL import Image
@@ -9,9 +9,20 @@ import os
 from pathlib import Path
 import subprocess
 import json
+from bs4 import BeautifulSoup
+
 # from subprocess import Popen
 absFilePath = os.path.dirname(os.path.abspath(__file__))
 dir_to_save = Path(absFilePath + "/static/")
+
+#patterns:
+threeBall = []
+fourBall = []
+fiveBall = []
+sixBall = []
+patternList = []
+patternType = ["3balltricks", "4balltricks", "5balltricks", "6balltricks"]
+data = {}
 
 try:
     with open(os.path.join(dir_to_save, f"cascade0.png")) as f:
@@ -30,6 +41,45 @@ except IOError:
         imageObject.save(os.path.join(fileSave))
         #run bash script to change to .jpg and move to correct directory...
         subprocess.Popen(['./convert.sh', fileSave])
+
+def getPattern(pat, type):
+    right = pat[pat.rfind("/"):]
+    left = right[:right.rfind(".")]
+    pattern = left.replace("/", "")
+    patternList.append(pattern)
+    if type == "3balltricks":
+        threeBall.append(pattern)
+    if type == "4balltricks":
+        fourBall.append(pattern)
+    if type == "5balltricks":
+        fiveBall.append(pattern)
+    if type == "6balltricks":
+        sixBall.append(pattern)
+
+def allPatternsFromSite():
+    url = 'https://libraryofjuggling.com/'
+    reqs = requests.get(url)
+    soup = BeautifulSoup(reqs.text, 'html.parser')
+    
+    urls = []
+    for link in soup.find_all('a'):
+        s = link.get('href')
+        for a in patternType:
+            if a in s:
+                getPattern(s, a)
+    print("")
+    print("3: ")
+    print(threeBall)
+    print("")
+    print("4: ")
+    print(fourBall)
+    print("")
+    print("5: ")
+    print(fiveBall)
+    print("")
+    print("6: ")
+    print(sixBall)
+    return(threeBall)
 
 def changePattern(pattern):
     try:
@@ -81,7 +131,12 @@ def home():
         print("No Post Back Call")
     print(f'pattern after form: ')
     print(pattern) 
-    return render_template("index.html", variable=frames, pattern=pattern)
+    # allPatterns = allPatternsFromSite() #todo: allPatterns currently only returns 3Ball...
+    
+    data["threeBall"] = ["Alex", "CherryPicker"]
+    print("data is: ")
+    print(data)
+    return render_template("index.html", variable=frames, pattern=pattern, data=data)
     # return render_template("index.html", variable=frames, pattern="box") #test
     
 if __name__ == "__main__":

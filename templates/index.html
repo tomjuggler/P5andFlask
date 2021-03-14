@@ -19,14 +19,14 @@
   <p> Choose your pattern... </p>
 
   <form id="form" method="post" action="/">
-    <input type="submit" style="width: 200px; height: 40px;" value="Cascade" name="Cascade" />
+    <!-- <input type="submit" style="width: 200px; height: 40px;" value="Cascade" name="Cascade" />
     <input type="submit" style="width: 200px; height: 40px;" value="ReverseCascade" name="ReverseCascade" />
     <input type="submit" style="width: 200px; height: 40px;" value="millsmess" name="millsmess" />
     <input type="submit" style="width: 200px; height: 40px;" value="chops" name="chops" />
     <input type="submit" style="width: 200px; height: 40px;" value="jugglerstennis" name="jugglerstennis" />
 
 
-    <input type="submit" style="width: 200px; height: 40px;" value="StatueOfLiberty" name="StatueOfLiberty" />
+    <input type="submit" style="width: 200px; height: 40px;" value="StatueOfLiberty" name="StatueOfLiberty" /> -->
     <input type="submit" style="width: 200px; height: 40px;" value="Box" name="Box" />
     <!-- <input type="submit" style="width: 200px; height: 40px;" value="Columnsonehand" name="Columnsonehand" /> -->
 
@@ -45,16 +45,39 @@
   let pattern = "{{pattern}}";
   console.log("pattern is: " + pattern);
 
-  
+  var data = JSON.parse('{{data | tojson | safe}}');
+  var threeBalls = data.threeBall;
+
+  console.log(threeBalls);
+  threeBalls.forEach(function (pat) {
+    console.log(pat);
+  });
+  // console.log("data :" + data);
+
 
   $(document).ready(function () {
     console.log("ready");
+    threeBalls.forEach(function (pat) {
+      console.log(pat);
+      $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="' + pat + '" name="' + pat + '" />'));
+
+    });
     // $("#body").css("background-color", "black"); //works
     //$("title").css("background-color", "red", "color", "white"); //not working
     // $(this).css("background-color", "black");
+    // var threeBalls = data.threeBall;
 
+    // console.log(threeBall);
+    // threeBalls.forEach(function (pat) {
+    //     console.log(pat);
+    // });
     //add to form: (works!)
-    $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="Columnsonehand" name="Columnsonehand" />'));
+    // $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="Columnsonehand" name="Columnsonehand" />'));
+
+    // for(k in threeBall){
+    //   console.log
+    // $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="' + threeBall[k] + '" name="' + threeBall[k] +'" />'));
+    // }
     //todo: use above method to build buttons for multiple patterns using list provided by server 
   });
 
