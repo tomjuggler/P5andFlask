@@ -67,31 +67,44 @@ def allPatternsFromSite():
         for a in patternType:
             if a in s:
                 getPattern(s, a)
-    print("")
-    print("3: ")
-    print(threeBall)
-    print("")
-    print("4: ")
-    print(fourBall)
-    print("")
-    print("5: ")
-    print(fiveBall)
-    print("")
-    print("6: ")
-    print(sixBall)
-    return(threeBall)
+    # print("")
+    # print("3: ")
+    # print(threeBall)
+    # print("")
+    # print("4: ")
+    # print(fourBall)
+    # print("")
+    # print("5: ")
+    # print(fiveBall)
+    # print("")
+    # print("6: ")
+    # print(sixBall)
+    data["threeBall"] = threeBall
+    data["fourBall"] = fourBall
+    data["fiveBall"] = fiveBall
+    data["sixBall"] = sixBall
+    # print(data)
+    return(data)
 
 def changePattern(pattern):
     try:
         with open(os.path.join(dir_to_save, f"{pattern}0.png")) as f:
             print(f'file exists')
             #open gif to get number of frames - todo: get number of frames from file system later!
-            imageObject = Image.open(requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw)
-
+            r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw
+            # if r.status_code == 200:
+            # print(r.status_code)
+            imageObject = Image.open(r)
+            numFrames = imageObject.n_frames
+            return numFrames
     except IOError:
         print(f'no file exists, loading...')
         #todo: support 5 ball patterns here /5balltricks/
-        imageObject = Image.open(requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw)
+        # r = requests.get("https://libraryofjuggling.com/JugglingGifs/5balltricks/fiveballsplitmultiplexcascade.gif", stream=True).raw
+        r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw
+        # if r.status_code == 200:
+        # print(r.status_code)
+        imageObject = Image.open(r)
             # Display individual frames from the loaded animated GIF file
             
         for frame in range(0,imageObject.n_frames):
@@ -103,10 +116,12 @@ def changePattern(pattern):
             imageObject.save(os.path.join(fileSave))
             #run bash script to change to .png and move to correct directory...
             subprocess.Popen(['./convert.sh', fileSave])
-    # print(f'number of frames: ')
-    # print(imageObject.n_frames)
-    numFrames = imageObject.n_frames
-    return numFrames
+        numFrames = imageObject.n_frames
+        return numFrames
+        # print(f'number of frames: ')
+        # print(imageObject.n_frames)
+        # numFrames = imageObject.n_frames
+        # return numFrames
 
 
 
@@ -121,23 +136,38 @@ def home():
     frames = 38
     if request.method == 'POST':
         pattern = next(iter(request.form)).lower()
+        print("pattern is", pattern)
         print(type(pattern))
         frames = changePattern(pattern)
-        print(f'pattern from form: ')
-        print(pattern)
-        print(f'number of frames: ')
-        print(frames)
+        # print(f'pattern from form: ')
+        # print(pattern)
+        # print(f'number of frames: ')
+        # print(frames)
+        # print(f'pattern after form: ')
+        # print(pattern) 
+        # allPatterns = allPatternsFromSite() #todo: allPatterns currently only returns 3Ball...
+        # # data["threeBall"] = allPatterns
+        # data = allPatterns #get all patterns at once!
+        # data["threeBall"] = ["Alex", "CherryPicker"]
+        # print("data is: ")
+        # print(data)
+    # return render_template("index.html", variable=frames, pattern="box") #test
     elif request.method == 'GET':
         print("No Post Back Call")
+    print(f'pattern from form: ')
+    print(pattern)
+    print(f'number of frames: ')
+    print(frames)
     print(f'pattern after form: ')
     print(pattern) 
     allPatterns = allPatternsFromSite() #todo: allPatterns currently only returns 3Ball...
-    data["threeBall"] = allPatterns
+    # data["threeBall"] = allPatterns
+    data = allPatterns #get all patterns at once!
     # data["threeBall"] = ["Alex", "CherryPicker"]
-    print("data is: ")
-    print(data)
+    # print("data is: ")
+    # print(data) 
     return render_template("index.html", variable=frames, pattern=pattern, data=data)
-    # return render_template("index.html", variable=frames, pattern="box") #test
+    
     
 if __name__ == "__main__":
     app.run()

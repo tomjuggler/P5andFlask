@@ -38,11 +38,14 @@
 
   var data = JSON.parse('{{data | tojson | safe}}');
   var threeBalls = data.threeBall;
+  var fourBalls = data.fourBall;
+  var fiveBalls = data.fiveBall;
+  var sixBalls = data.sixBall;
 
-  console.log(threeBalls);
-  threeBalls.forEach(function (pat) {
-    console.log(pat);
-  });
+  // console.log(threeBalls);
+  // threeBalls.forEach(function (pat) {
+  //   console.log(pat);
+  // });
   // console.log("data :" + data);
 
 
@@ -53,6 +56,18 @@
     });
 
     threeBalls.forEach(function (pat) {
+      console.log(pat);
+      $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="' + pat + '" name="' + pat + '" />'));
+    }); 
+    fourBalls.forEach(function (pat) {
+      console.log(pat);
+      $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="' + pat + '" name="' + pat + '" />'));
+    }); 
+    fiveBalls.forEach(function (pat) {
+      console.log(pat);
+      $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="' + pat + '" name="' + pat + '" />'));
+    }); 
+    sixBalls.forEach(function (pat) {
       console.log(pat);
       $("#form").append($('<input type="submit" style="width: 200px; height: 40px;" value="' + pat + '" name="' + pat + '" />'));
     }); 
