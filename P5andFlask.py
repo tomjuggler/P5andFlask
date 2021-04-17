@@ -115,7 +115,8 @@ def changePattern(pattern):
             fileSave = os.path.join(dir_to_save, f"{pattern}{frame}.gif") #unique name per image pattern frame
             imageObject.save(os.path.join(fileSave))
             #run bash script to change to .png and move to correct directory...
-            subprocess.Popen(['./convert.sh', fileSave])
+            process = subprocess.Popen(['./convert.sh', fileSave])
+            process.wait() # is this necessary? 
         numFrames = imageObject.n_frames
         return numFrames
         # print(f'number of frames: ')
