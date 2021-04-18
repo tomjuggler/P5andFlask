@@ -29,7 +29,7 @@ try:
         print(f'file exists')
         #open gif to get number of frames - todo: get number of frames from file system later!
         imageObject = Image.open(requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/cascade.gif", stream=True).raw)
-except IOError:
+except Exception:
     imageObject = Image.open(requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/cascade.gif", stream=True).raw)
     # Display individual frames from the loaded animated GIF file
     absFilePath = os.path.dirname(os.path.abspath(__file__))
