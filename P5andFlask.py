@@ -100,7 +100,7 @@ def changePattern(pattern):
             imageObject = Image.open(r)
             numFrames = imageObject.n_frames
             return numFrames
-    except IOError:
+    except Exception:
         print(f'no file exists, loading...')
         #todo: support 5 ball patterns here /5balltricks/
         # r = requests.get("https://libraryofjuggling.com/JugglingGifs/5balltricks/fiveballsplitmultiplexcascade.gif", stream=True).raw
