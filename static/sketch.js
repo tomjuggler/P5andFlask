@@ -71,7 +71,7 @@ function draw() {
   rect(0, 0, width, 20);
   rect(inImg[0].width, 0, width, height);
   rect(0, inImg[0].height + 20, width, height);
-  let d = pixelDensity();
+  // let d = pixelDensity();
   if (millis() - tiempoInicio > tiempoEspera) {
     count++;
     // g = int(random(0, 255));
@@ -86,7 +86,7 @@ function draw() {
       //  inImg[count].filter(INVERT);
 
       image(inImg[count], 0, 20);
-      loadPixels();
+      // loadPixels();
       /*
             for (let y = 0; y < inImg[count].height; y++) {
               for (let x = 0; x < inImg[count].width; x++) {
