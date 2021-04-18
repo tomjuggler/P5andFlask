@@ -50,7 +50,7 @@ def getPattern(pat, type):
     right = pat[pat.rfind("/"):]
     left = right[:right.rfind(".")]
     pattern = left.replace("/", "")
-    patternList.append(pattern)
+    patternList.append(pattern) #is this needed or duplicate?
     if type == "3balltricks":
         threeBall.append(pattern)
     if type == "4balltricks":
@@ -59,6 +59,7 @@ def getPattern(pat, type):
         fiveBall.append(pattern)
     if type == "6balltricks":
         sixBall.append(pattern)
+    return pattern
 
 def allPatternsFromSite():
     url = 'https://libraryofjuggling.com/'
@@ -93,12 +94,17 @@ def allPatternsFromSite():
 def changePattern(pattern):
     try:
         print("pattern is: ", f"{pattern}0.png");
-        with open(os.path.join(dir_to_save, f"{pattern}0.png")) as f:
+        patname = getPattern(pattern, pattern)
+        with open(os.path.join(dir_to_save, f"{patname}0.png")) as f:
             print(f'file exists')
             #open gif to get number of frames - todo: get number of frames from file system later!
-            r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw
+            # r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw
+            r = requests.get("https://libraryofjuggling.com/JugglingGifs/" + pattern + ".gif", stream=True)
             #solution from https://stackoverflow.com/questions/13137817/how-to-download-image-using-requests
-            imageObject = Image.open(r)
+            r.raise_for_status()
+            r.raw.decode_content = True
+            imageObject = Image.open(r.raw)
+            # imageObject = Image.open(r)
             numFrames = imageObject.n_frames
             return numFrames
     except Exception:
@@ -106,7 +112,9 @@ def changePattern(pattern):
         #todo: support 5 ball patterns here /5balltricks/
         # r = requests.get("https://libraryofjuggling.com/JugglingGifs/5balltricks/fiveballsplitmultiplexcascade.gif", stream=True).raw
         # r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw
-        r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True)
+        # r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True)
+        r = requests.get("https://libraryofjuggling.com/JugglingGifs/" + pattern + ".gif", stream=True)
+
 
         # if r.status_code == 200:
         # print(r.status_code)
@@ -120,7 +128,9 @@ def changePattern(pattern):
             print(f'frame: ')
             print(frame)
             imageObject.convert("RGBA")
-            fileSave = os.path.join(dir_to_save, f"{pattern}{frame}.gif") #unique name per image pattern frame
+            patname = getPattern(pattern, pattern)
+            print("patname is: ", patname)
+            fileSave = os.path.join(dir_to_save, f"{patname}{frame}.gif") #unique name per image pattern frame
             imageObject.save(os.path.join(fileSave))
             #run bash script to change to .png and move to correct directory...
             process = subprocess.Popen(['./convert.sh', fileSave]) #local is ./convert.sh
@@ -175,7 +185,8 @@ def home():
     # data["threeBall"] = ["Alex", "CherryPicker"]
     # print("data is: ")
     # print(data) 
-    return render_template("index.html", variable=frames, pattern=pattern, data=data)
+    patname = getPattern(pattern, pattern)
+    return render_template("index.html", variable=frames, pattern=patname, data=data)
     
     
 if __name__ == "__main__":
