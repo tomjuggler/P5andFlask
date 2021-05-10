@@ -13,9 +13,10 @@ import json
 from bs4 import BeautifulSoup
 
 # from subprocess import Popen
-absFilePath = os.path.dirname(os.path.abspath(__file__))
+# absFilePath = os.path.dirname(os.path.abspath(__file__))
 # dir_to_save = Path("/var/www/P5andFlask/static/")
-dir_to_save = Path(absFilePath + "/static/") #local version for tests
+# dir_to_save = Path(absFilePath + "/static/") #local version for tests
+dir_to_save = ('static')
 
 #patterns:
 threeBall = []
@@ -37,7 +38,7 @@ except Exception:
     absFilePath = os.path.dirname(os.path.abspath(__file__))
     for frame in range(0,imageObject.n_frames):
         imageObject.seek(frame)
-        dir_to_save = Path(absFilePath + "/static/") #local
+        # dir_to_save = Path(absFilePath + "/static/") #local
         # dir_to_save = Path("/var/www/P5andFlask/static/")
         print(dir_to_save)
         fileSave = os.path.join(dir_to_save, f"{frame}.gif")
