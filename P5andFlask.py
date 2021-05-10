@@ -41,7 +41,7 @@ except Exception:
         # dir_to_save = Path(absFilePath + "/static/") #local
         # dir_to_save = Path("/var/www/P5andFlask/static/")
         print(dir_to_save)
-        fileSave = os.path.join(dir_to_save, f"{frame}.gif")
+        fileSave = os.path.join(absFilePath + "/" + dir_to_save, f"{frame}.gif")
         imageObject.save(os.path.join(fileSave))
         #run bash script to change to .jpg and move to correct directory...
         # subprocess.Popen(['./convert.sh', fileSave])
@@ -99,7 +99,8 @@ def changePattern(pattern):
     try:
         print("pattern is: ", f"{pattern}0.png");
         patname = getPattern(pattern, pattern)
-        with open(os.path.join(dir_to_save, f"{patname}0.png")) as f:
+        absFilePath = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(absFilePath + "/" + dir_to_save, f"{patname}0.png")) as f:
             print(f'file exists')
             #open gif to get number of frames - todo: get number of frames from file system later!
             # r = requests.get("https://libraryofjuggling.com/JugglingGifs/3balltricks/" + pattern + ".gif", stream=True).raw
@@ -134,10 +135,10 @@ def changePattern(pattern):
             imageObject.convert("RGBA")
             patname = getPattern(pattern, pattern)
             print("patname is: ", patname)
-            fileSave = os.path.join(dir_to_save, f"{patname}{frame}.gif") #unique name per image pattern frame
+            fileSave = os.path.join(absFilePath + "/" + dir_to_save, f"{patname}{frame}.gif") #unique name per image pattern frame
             imageObject.save(os.path.join(fileSave))
             #run bash script to change to .png and move to correct directory...
-            process = subprocess.Popen(['./convert.sh', fileSave]) #local is ./convert.sh
+            process = subprocess.Popen([absFilePath + '/convert.sh', fileSave]) #local is ./convert.sh
             process.wait() # is this necessary? 
         numFrames = imageObject.n_frames
         return numFrames
