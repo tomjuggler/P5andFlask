@@ -45,7 +45,7 @@ except Exception:
         imageObject.save(os.path.join(fileSave))
         #run bash script to change to .jpg and move to correct directory...
         # subprocess.Popen(['./convert.sh', fileSave])
-        subprocess.Popen(['./convert.sh', fileSave])
+        subprocess.Popen([absFilePath + '/convert.sh', fileSave])
 
 def getPattern(pat, type):
     right = pat[pat.rfind("/"):]
