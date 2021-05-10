@@ -48,8 +48,11 @@ except Exception:
 
 def getPattern(pat, type):
     right = pat[pat.rfind("/"):]
+    print("pattern after right:", right)
     left = right[:right.rfind(".")]
+    print("pattern after left:", left)
     pattern = left.replace("/", "")
+    print("pattern after replace:", pattern) #todo: this is removing a letter from the end of pattern! 
     patternList.append(pattern) #is this needed or duplicate?
     if type == "3balltricks":
         threeBall.append(pattern)
