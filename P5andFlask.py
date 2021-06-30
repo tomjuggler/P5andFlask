@@ -53,6 +53,7 @@ def getPattern(pat, type):
     left = right[:right.rfind(".")]
     print("pattern after left:", left)
     pattern = left.replace("/", "")
+    # pattern = right.replace("/", "")
     print("pattern after replace:", pattern) #todo: this is removing a letter from the end of pattern! 
     patternList.append(pattern) #is this needed or duplicate?
     if type == "3balltricks":
