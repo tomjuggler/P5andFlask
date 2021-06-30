@@ -12,6 +12,7 @@ import subprocess
 import json
 from bs4 import BeautifulSoup
 
+app = Flask(__name__)
 # from subprocess import Popen
 # absFilePath = os.path.dirname(os.path.abspath(__file__))
 # dir_to_save = Path("/var/www/P5andFlask/static/")
@@ -195,5 +196,5 @@ def home():
     return render_template("index.html", variable=frames, pattern=patname, data=data)
     
     
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
