@@ -66,7 +66,7 @@ function setup() {
 function draw() {
   patternChooser();
   // background(random(255), random(200), random(255));
-  fill(0);
+  fill(100);
   stroke(0);
   rect(0, 0, width, 20);
   rect(inImg[0].width, 0, width, height);
@@ -154,13 +154,85 @@ function draw() {
 image(remoteImage, width/8*3, 0, width/6*4, height/6*4); //todo: get the relative button points for mousePressed!
 text("x: " + width/mouseX*100 + " y: " + height/mouseY*100, mouseX, mouseY);
 }
+
 function mousePressed() {
-  //todo: make mouse grid corresponding to remote buttons
-  patternIter++;
-  if(patternIter > maxPatterns){
-    patternIter = 0;
-  }
+    if (width/mouseX*100 > 120 && width/mouseX*100 < 128 && height/mouseY*100 > 335 && height/mouseY*100 < 340 ) {
+      console.log("pressed fade");
+      patternIter = 0; //fade
+    }
+    if (width/mouseX*100 > 157 && width/mouseX*100 < 170 && height/mouseY*100 > 267 && height/mouseY*100 < 300 ) {
+      console.log("pressed strobePlus");
+      patternIter = 1; //strobePlus
+    } 
+    if (width/mouseX*100 > 142 && width/mouseX*100 < 154 && height/mouseY*100 > 264 && height/mouseY*100 < 303 ) {
+      console.log("pressed RGBStrobe");
+      patternIter = 2; //RGBStrobe
+    } 
+    if (width/mouseX*100 > 130 && width/mouseX*100 < 139 && height/mouseY*100 > 264 && height/mouseY*100 < 303 ) {
+      console.log("pressed rainbow");
+      patternIter = 3; //rainbow
+    } 
+    if (width/mouseX*100 > 120 && width/mouseX*100 < 128 && height/mouseY*100 > 264 && height/mouseY*100 < 303 ) {
+      console.log("pressed halfStrobe");
+      patternIter = 4; //halfStrobe
+    } 
+    if (width/mouseX*100 > 157 && width/mouseX*100 < 170 && height/mouseY*100 > 227 && height/mouseY*100 < 256 ) {
+      console.log("pressed GRStrobe");
+      patternIter = 5; //GRStrobe
+    }
+    if (width/mouseX*100 > 143 && width/mouseX*100 < 152 && height/mouseY*100 > 227 && height/mouseY*100 < 256 ) {
+      console.log("pressed BGStrobe");
+      patternIter = 6; //BGStrobe
+    }
+    if (width/mouseX*100 > 143 && width/mouseX*100 < 152 && height/mouseY*100 > 383 && height/mouseY*100 < 468 ) {
+      console.log("pressed red");
+      patternIter = 7; //red
+    }
+    if (width/mouseX*100 > 157 && width/mouseX*100 < 170 && height/mouseY*100 > 383 && height/mouseY*100 < 468 ) {
+      console.log("pressed green");
+      patternIter = 8; //green
+    } 
+    if (width/mouseX*100 > 130 && width/mouseX*100 < 139 && height/mouseY*100 > 383 && height/mouseY*100 < 468 ) {
+      console.log("pressed blue");
+      patternIter = 9; //blue
+    } 
+    if (width/mouseX*100 > 157 && width/mouseX*100 < 170 && height/mouseY*100 > 315 && height/mouseY*100 < 362 ) {
+      console.log("pressed cyan");
+      patternIter = 10; //cyan
+    } 
+    if (width/mouseX*100 > 120 && width/mouseX*100 < 128 && height/mouseY*100 > 383 && height/mouseY*100 < 468 ) {
+      console.log("pressed yellow");
+      patternIter = 11; //yellow
+    }
+    if (width/mouseX*100 > 143 && width/mouseX*100 < 152 && height/mouseY*100 > 315 && height/mouseY*100 < 362 ) {
+      console.log("pressed magenta");
+      patternIter = 12; //magenta
+    } 
+    if (width/mouseX*100 > 130 && width/mouseX*100 < 139 && height/mouseY*100 > 315 && height/mouseY*100 < 362 ) {
+      console.log("pressed white");
+      patternIter = 13; //white
+    } 
+    if (width/mouseX*100 > 157 && width/mouseX*100 < 170 && height/mouseY*100 > 500 && height/mouseY*100 < 663 ) {
+      console.log("pressed minus");
+        patternIter--;
+        if(patternIter < 0){
+          patternIter = maxPatterns-1;
+        }  
+    } 
+    if (width/mouseX*100 > 143 && width/mouseX*100 < 152 && height/mouseY*100 > 500 && height/mouseY*100 < 663 ) {
+      console.log("pressed plus");
+         patternIter++;
+          if(patternIter > maxPatterns){
+            patternIter = 0;
+          }
+    } 
   
+  // else{
+  //   patternIter++;
+  //   if(patternIter > maxPatterns){
+  //     patternIter = 0;
+  //   }
+  // }  
 }
 
 
