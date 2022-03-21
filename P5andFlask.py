@@ -166,8 +166,8 @@ def changePattern(pattern):
 @app.route("/", methods=['GET', 'POST'])
 def home():
     # print(request.method)
-    pattern = "box"
-    frames = 38
+    pattern = "bo"
+    frames = 27
     if request.method == 'POST':
         pattern = next(iter(request.form)).lower()
         print("pattern is", pattern)
@@ -202,7 +202,10 @@ def home():
     # print(data) 
     patname = getPattern(pattern, pattern)
     return render_template("index.html", variable=frames, pattern=patname, data=data)
-    
+
+@app.route("/about", methods=['GET', 'POST'])
+def about():
+    return render_template("about.html")
     
 # if __name__ == "__main__":
 #     app.run()
