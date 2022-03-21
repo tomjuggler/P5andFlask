@@ -160,10 +160,7 @@ function mousePressed() {
   if(patternIter > maxPatterns){
     patternIter = 0;
   }
-  // preload();
-  // print("preload?");
-  //preload() can't be set here, or doesn't work..
-  //maybe save all images as different names on server, then call those with a variable! 
+  
 }
 
 

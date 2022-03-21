@@ -57,6 +57,11 @@ def getPattern(pat, type):
     pattern = left.replace("/", "")
     # pattern = right.replace("/", "")
     print("pattern after replace:", pattern) #todo: this is removing a letter from the end of pattern! 
+    #a bit of cleaning up: remove "'" and "-"
+    pattern = pattern.replace("'", "")
+    pattern = pattern.replace("-", "")
+    if("(" in pattern): #deal with "()" not working todo: fix this - affects two patterns
+        return
     if(pattern not in patternList): #todo: does this work and solve the duplication issue? Seems so!
         patternList.append(pattern) #is this needed or duplicate?
     if type == "3balltricks":
