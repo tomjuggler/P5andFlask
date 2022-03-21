@@ -66,7 +66,7 @@ function setup() {
 function draw() {
   patternChooser();
   // background(random(255), random(200), random(255));
-  fill(100);
+  fill(0);
   stroke(0);
   rect(0, 0, width, 20);
   rect(inImg[0].width, 0, width, height);
@@ -151,8 +151,8 @@ function draw() {
   //     image(inImg[count], 0, 0);
   //   }    
   // }
-image(remoteImage, width/8*3, 0, width/6*4, height/6*4); //todo: get the relative button points for mousePressed!
-text("x: " + width/mouseX*100 + " y: " + height/mouseY*100, mouseX, mouseY);
+image(remoteImage, width/8*3, 0, width/6*4, height/6*4); 
+// text("x: " + width/mouseX*100 + " y: " + height/mouseY*100, mouseX, mouseY); //todo: for testing only!
 }
 
 function mousePressed() {
