@@ -49,6 +49,7 @@ except Exception:
         subprocess.Popen([absFilePath + '/convert.sh', fileSave])
 
 def getPattern(pat, type):
+
     right = pat[pat.rfind("/"):]
     print("pattern after right:", right)
     left = right[:right.rfind(".")]
@@ -56,7 +57,8 @@ def getPattern(pat, type):
     pattern = left.replace("/", "")
     # pattern = right.replace("/", "")
     print("pattern after replace:", pattern) #todo: this is removing a letter from the end of pattern! 
-    patternList.append(pattern) #is this needed or duplicate?
+    if(pattern not in patternList): #todo: does this work and solve the duplication issue? Seems so!
+        patternList.append(pattern) #is this needed or duplicate?
     if type == "3balltricks":
         threeBall.append(pattern)
     if type == "4balltricks":
@@ -94,7 +96,8 @@ def allPatternsFromSite():
     data["fourBall"] = fourBall
     data["fiveBall"] = fiveBall
     data["sixBall"] = sixBall
-    # print(data)
+    sizeOfData = len(data["threeBall"]) + len(data["fourBall"])  + len(data["fiveBall"]) + len(data["sixBall"])
+    print("data length is: ", sizeOfData)
     return(data)
 
 def changePattern(pattern):
