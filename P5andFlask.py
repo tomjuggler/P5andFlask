@@ -62,16 +62,16 @@ def getPattern(pat, type):
     pattern = pattern.replace("-", "")
     if("(" in pattern): #deal with "()" not working todo: fix this - affects two patterns
         return
-    if(pattern not in patternList): #todo: does this work and solve the duplication issue? Seems so!
+    if(pattern not in patternList): #todo: does this work and solve the duplication issue? NO!
         patternList.append(pattern) #is this needed or duplicate?
-    if type == "3balltricks":
-        threeBall.append(pattern)
-    if type == "4balltricks":
-        fourBall.append(pattern)
-    if type == "5balltricks":
-        fiveBall.append(pattern)
-    if type == "6balltricks":
-        sixBall.append(pattern)
+        if type == "3balltricks":
+            threeBall.append(pattern)
+        if type == "4balltricks":
+            fourBall.append(pattern)
+        if type == "5balltricks":
+            fiveBall.append(pattern)
+        if type == "6balltricks":
+            sixBall.append(pattern)
     return pattern
 
 def allPatternsFromSite():
